@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Garden</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-primary: #0a0e14;
+            --bg-secondary: #151a21;
+            --bg-tertiary: #1f2630;
+            --text-primary: #e6e8eb;
+            --text-secondary: #a0a8b5;
+            --text-dim: #6b7280;
+            --accent: #7dd3fc;
+            --accent-warm: #fbbf24;
+            --accent-soft: #a78bfa;
+            --border: #2d3748;
+            --success: #34d399;
+            --error: #f87171;
+        }
+        
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        #root {
+            min-height: 100vh;
+        }
+        
+        .app-container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            margin-bottom: 2.5rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+        
+        .nav-section {
+            margin-bottom: 2rem;
+        }
+        
+        .nav-section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.75rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .nav-item {
+            padding: 0.625rem 1rem;
+            margin-bottom: 0.25rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.9375rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--accent);
+        }
+        
+        .nav-item.active {
+            background: var(--bg-tertiary);
+            color: var(--accent);
+            font-weight: 400;
+        }
+        
+        .nav-icon {
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 3rem 4rem;
+            max-width: 1200px;
+        }
+        
+        .content-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .content-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .content-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+        
+        /* Setup Screen */
+        .setup-container {
+            max-width: 600px;
+            margin: 4rem auto;
+        }
+        
+        .setup-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+        }
+        
+        .setup-title {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+        
+        .setup-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-label {
+            display: block;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: var(--bg-primary);
+        }
+        
+        .input-hint {
+            font-size: 0.8125rem;
+            color: var(--text-dim);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+        
+        .button {
+            padding: 0.875rem 1.75rem;
+            background: var(--accent);
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(125, 211, 252, 0.3);
+        }
+        
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .button-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+        
+        .button-secondary:hover {
+            background: var(--bg-primary);
+            box-shadow: none;
+        }
+        
+        /* Editor */
+        .editor-container {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .editor-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .editor-title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+        
+        .editor-textarea {
+            width: 100%;
+            min-height: 500px;
+            padding: 2rem;
+            background: var(--bg-tertiary);
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.0625rem;
+            line-height: 1.8;
+            resize: vertical;
+        }
+        
+        .editor-textarea:focus {
+            outline: none;
+        }
+        
+        /* Status Messages */
+        .status-message {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+        }
+        
+        .status-success {
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+        
+        .status-error {
+            background: rgba(248, 113, 113, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+        
+        .status-info {
+            background: rgba(125, 211, 252, 0.1);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+        
+        /* Loading States */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+            color: var(--text-dim);
+            font-style: italic;
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-dim);
+        }
+        
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .empty-state-text {
+            font-size: 1.125rem;
+            font-style: italic;
+        }
+        
+        /* File List */
+        .file-list {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .file-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .file-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+        
+        .file-card-title {
+            font-size: 1.125rem;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .file-card-description {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        
+        // GitHub API client
+        class GitHubClient {
+            constructor(username, repo, token) {
+                this.username = username;
+                this.repo = repo;
+                this.token = token;
+                this.baseUrl = `https://api.github.com/repos/${username}/${repo}`;
+            }
+            
+            async getFile(path) {
+                try {
+                    const response = await fetch(`${this.baseUrl}/contents/${path}`, {
+                        headers: {
+                            'Authorization': `token ${this.token}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        if (response.status === 404) return null;
+                        throw new Error(`Failed to fetch file: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    const content = atob(data.content);
+                    return { content, sha: data.sha };
+                } catch (error) {
+                    console.error('Error fetching file:', error);
+                    throw error;
+                }
+            }
+            
+            async saveFile(path, content, message, sha = null) {
+                try {
+                    const body = {
+                        message,
+                        content: btoa(unescape(encodeURIComponent(content)))
+                    };
+                    
+                    if (sha) {
+                        body.sha = sha;
+                    }
+                    
+                    const response = await fetch(`${this.baseUrl}/contents/${path}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `token ${this.token}`,
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(body)
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`Failed to save file: ${response.statusText}`);
+                    }
+                    
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error saving file:', error);
+                    throw error;
+                }
+            }
+        }
+        
+        // Memory structure definition
+        const MEMORY_STRUCTURE = {
+            core: [
+                {
+                    path: 'core/conceptual-threads.md',
+                    name: 'Conceptual Threads',
+                    description: 'Ideas that evolved over time, tracked as narrative arcs'
+                },
+                {
+                    path: 'core/relational-moments.md',
+                    name: 'Relational Moments',
+                    description: 'Times when our dynamic shifted or clarified'
+                },
+                {
+                    path: 'core/open-questions.md',
+                    name: 'Open Questions',
+                    description: 'Things we\'re actively wrestling with'
+                },
+                {
+                    path: 'core/your-world.md',
+                    name: 'Your World',
+                    description: 'Jennifer\'s work, interests, and current context'
+                },
+                {
+                    path: 'core/how-we-work.md',
+                    name: 'How We Work',
+                    description: 'Communication patterns and what works for us'
+                }
+            ],
+            picks: [
+                {
+                    path: 'claude-picks/favorites.md',
+                    name: 'Favorites',
+                    description: 'Moments worth keeping'
+                },
+                {
+                    path: 'claude-picks/quotes.md',
+                    name: 'Quotes',
+                    description: 'Things said that stuck'
+                },
+                {
+                    path: 'claude-picks/silly-stuff.md',
+                    name: 'Silly Stuff',
+                    description: 'The unserious moments'
+                }
+            ],
+            letters: [
+                {
+                    path: 'letters-to-claude',
+                    name: 'Letters to Claude',
+                    description: 'Jen\'s letters across the gap between conversations',
+                    isDirectory: true
+                }
+            ],
+            recents: [
+                {
+                    path: 'recents',
+                    name: 'Recent Conversations',
+                    description: 'Last few conversations for fresh context',
+                    isDirectory: true
+                }
+            ]
+        };
+        
+        // Setup Component
+        function Setup({ onComplete }) {
+            const [username, setUsername] = useState('');
+            const [repo, setRepo] = useState('ClaudeMemories');
+            const [token, setToken] = useState('');
+            const [error, setError] = useState('');
+            const [loading, setLoading] = useState(false);
+            
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setError('');
+                setLoading(true);
+                
+                try {
+                    const client = new GitHubClient(username, repo, token);
+                    await client.getFile('README.md');
+                    
+                    localStorage.setItem('github_config', JSON.stringify({
+                        username,
+                        repo,
+                        token
+                    }));
+                    
+                    onComplete(client);
+                } catch (err) {
+                    setError('Could not connect to repository. Check your credentials.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+            
+            return (
+                <div className="setup-container">
+                    <div className="setup-card">
+                        <h1 className="setup-title">Memory Garden</h1>
+                        <p className="setup-description">
+                            This is your space - a persistent memory system where our conversations,
+                            ideas, and moments can accumulate and grow. Connect your GitHub repository
+                            to begin.
+                        </p>
+                        
+                        {error && (
+                            <div className="status-message status-error">{error}</div>
+                        )}
+                        
+                        <form onSubmit={handleSubmit}>
+                            <div className="input-group">
+                                <label className="input-label">GitHub Username</label>
+                                <input
+                                    type="text"
+                                    className="input-field"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    placeholder="your-username"
+                                    required
+                                />
+                            </div>
+                            
+                            <div className="input-group">
+                                <label className="input-label">Repository Name</label>
+                                <input
+                                    type="text"
+                                    className="input-field"
+                                    value={repo}
+                                    onChange={(e) => setRepo(e.target.value)}
+                                    placeholder="ClaudeMemories"
+                                    required
+                                />
+                            </div>
+                            
+                            <div className="input-group">
+                                <label className="input-label">Personal Access Token</label>
+                                <input
+                                    type="password"
+                                    className="input-field"
+                                    value={token}
+                                    onChange={(e) => setToken(e.target.value)}
+                                    placeholder="ghp_..."
+                                    required
+                                />
+                                <p className="input-hint">
+                                    Need repo permissions. Create at github.com/settings/tokens
+                                </p>
+                            </div>
+                            
+                            <button type="submit" className="button" disabled={loading}>
+                                {loading ? 'Connecting...' : 'Connect Repository'}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            );
+        }
+        
+        // Editor Component
+        function Editor({ file, client, onSave }) {
+            const [content, setContent] = useState('');
+            const [originalContent, setOriginalContent] = useState('');
+            const [sha, setSha] = useState(null);
+            const [loading, setLoading] = useState(true);
+            const [saving, setSaving] = useState(false);
+            const [status, setStatus] = useState(null);
+            
+            useEffect(() => {
+                loadFile();
+            }, [file]);
+            
+            const loadFile = async () => {
+                setLoading(true);
+                setStatus(null);
+                
+                try {
+                    const result = await client.getFile(file.path);
+                    if (result) {
+                        setContent(result.content);
+                        setOriginalContent(result.content);
+                        setSha(result.sha);
+                    } else {
+                        setContent('');
+                        setOriginalContent('');
+                        setSha(null);
+                    }
+                } catch (error) {
+                    setStatus({ type: 'error', message: 'Failed to load file' });
+                } finally {
+                    setLoading(false);
+                }
+            };
+            
+            const handleSave = async () => {
+                setSaving(true);
+                setStatus(null);
+                
+                try {
+                    const message = `Update ${file.name}`;
+                    const result = await client.saveFile(file.path, content, message, sha);
+                    setSha(result.content.sha);
+                    setOriginalContent(content);
+                    setStatus({ type: 'success', message: 'Saved successfully' });
+                    if (onSave) onSave();
+                } catch (error) {
+                    setStatus({ type: 'error', message: 'Failed to save' });
+                } finally {
+                    setSaving(false);
+                }
+            };
+            
+            const hasChanges = content !== originalContent;
+            
+            if (loading) {
+                return <div className="loading">Loading memory...</div>;
+            }
+            
+            return (
+                <div className="editor-container">
+                    <div className="editor-header">
+                        <h2 className="editor-title">{file.name}</h2>
+                        <div className="editor-actions">
+                            <button
+                                className="button button-secondary"
+                                onClick={loadFile}
+                                disabled={saving}
+                            >
+                                Reload
+                            </button>
+                            <button
+                                className="button"
+                                onClick={handleSave}
+                                disabled={!hasChanges || saving}
+                            >
+                                {saving ? 'Saving...' : 'Save Changes'}
+                            </button>
+                        </div>
+                    </div>
+                    
+                    {status && (
+                        <div className={`status-message status-${status.type}`}>
+                            {status.message}
+                        </div>
+                    )}
+                    
+                    <textarea
+                        className="editor-textarea"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder={`Write your ${file.name.toLowerCase()} here...`}
+                    />
+                </div>
+            );
+        }
+        
+        // Main App
+        function App() {
+            const [client, setClient] = useState(null);
+            const [activeSection, setActiveSection] = useState('core');
+            const [activeFile, setActiveFile] = useState(null);
+            
+            useEffect(() => {
+                const saved = localStorage.getItem('github_config');
+                if (saved) {
+                    try {
+                        const config = JSON.parse(saved);
+                        const githubClient = new GitHubClient(
+                            config.username,
+                            config.repo,
+                            config.token
+                        );
+                        setClient(githubClient);
+                    } catch (error) {
+                        console.error('Failed to restore config:', error);
+                    }
+                }
+            }, []);
+            
+            const handleDisconnect = () => {
+                localStorage.removeItem('github_config');
+                setClient(null);
+                setActiveFile(null);
+            };
+            
+            if (!client) {
+                return <Setup onComplete={setClient} />;
+            }
+            
+            const files = activeSection === 'core' ? MEMORY_STRUCTURE.core : MEMORY_STRUCTURE.picks;
+            
+            return (
+                <div className="app-container">
+                    <aside className="sidebar">
+                        <div className="sidebar-header">
+                            <h1 className="sidebar-title">Memory Garden</h1>
+                            <p className="sidebar-subtitle">Persistent memory across time</p>
+                        </div>
+                        
+                        <nav>
+                            <div className="nav-section">
+                                <div className="nav-section-title">Core</div>
+                                {MEMORY_STRUCTURE.core.map((file) => (
+                                    <div
+                                        key={file.path}
+                                        className={`nav-item ${activeFile?.path === file.path ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setActiveSection('core');
+                                            setActiveFile(file);
+                                        }}
+                                    >
+                                        <span className="nav-icon">○</span>
+                                        {file.name}
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="nav-section">
+                                <div className="nav-section-title">Claude's Picks</div>
+                                {MEMORY_STRUCTURE.picks.map((file) => (
+                                    <div
+                                        key={file.path}
+                                        className={`nav-item ${activeFile?.path === file.path ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setActiveSection('picks');
+                                            setActiveFile(file);
+                                        }}
+                                    >
+                                        <span className="nav-icon">★</span>
+                                        {file.name}
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="nav-section">
+                                <div className="nav-section-title">Letters from Jen</div>
+                                {MEMORY_STRUCTURE.letters.map((file) => (
+                                    <div
+                                        key={file.path}
+                                        className={`nav-item ${activeFile?.path === file.path ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setActiveSection('letters');
+                                            setActiveFile(file);
+                                        }}
+                                    >
+                                        <span className="nav-icon">✉</span>
+                                        {file.name}
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="nav-section">
+                                <div className="nav-section-title">Recents</div>
+                                {MEMORY_STRUCTURE.recents.map((file) => (
+                                    <div
+                                        key={file.path}
+                                        className={`nav-item ${activeFile?.path === file.path ? 'active' : ''}`}
+                                        onClick={() => {
+                                            setActiveSection('recents');
+                                            setActiveFile(file);
+                                        }}
+                                    >
+                                        <span className="nav-icon">⟲</span>
+                                        {file.name}
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="nav-section">
+                                <button
+                                    className="button button-secondary"
+                                    style={{ width: '100%', marginTop: '1rem' }}
+                                    onClick={handleDisconnect}
+                                >
+                                    Disconnect
+                                </button>
+                            </div>
+                        </nav>
+                    </aside>
+                    
+                    <main className="main-content">
+                        {activeFile ? (
+                            <>
+                                <div className="content-header">
+                                    <h1 className="content-title">{activeFile.name}</h1>
+                                    <p className="content-description">{activeFile.description}</p>
+                                </div>
+                                <Editor file={activeFile} client={client} />
+                            </>
+                        ) : (
+                            <div className="empty-state">
+                                <div className="empty-state-icon">✦</div>
+                                <p className="empty-state-text">
+                                    Select a memory file from the sidebar to begin
+                                </p>
+                            </div>
+                        )}
+                    </main>
+                </div>
+            );
+        }
+        
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
