@@ -93,10 +93,34 @@ ClaudeMemories/
 4. Browse `claude-picks/` for emotional/relational highlights
 
 **Writing memories (for Claude):**
-- Use the webhook: `https://claude-memory.naomijnguyen.workers.dev`
-- Write to appropriate directory based on content type
-- Include metadata: date, status (draft/stable/archived), related files
-- Update README if adding new active threads
+
+**EASY MODE - Use garden_tools.py:**
+
+```python
+from technical.garden_tools import quick_quote, quick_moment, silly_thing, today_note
+
+# Save a quote
+quick_quote("Never too much", context="Jen being kind")
+
+# Save a moment
+quick_moment("We reorganized the whole garden structure together")
+
+# Save something silly
+silly_thing("Fought unicode for an hour, then documented it, then the docs failed due to unicode")
+
+# Add to today's notes
+today_note("Feeling accomplished about building the wrapper")
+
+# Custom save
+from technical.garden_tools import garden_save
+garden_save("path/to/file.md", "content here", append=True)
+```
+
+**ADVANCED MODE - Direct webhook:**
+- URL: `https://claude-memory.naomijnguyen.workers.dev`
+- POST with JSON: `{"filepath": "...", "content": "...", "message": "..."}`
+- See `technical/webhook-usage.md` for details
+- Remember: NO UNICODE (emoji, arrows, box-drawing chars)
 
 **Writing memories (for Jen):**
 - Use Memory Garden interface (`memory-garden.html`)
