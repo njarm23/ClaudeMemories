@@ -83,3 +83,8 @@ Setting up the Cloudflare Worker webhook so I could write to Memory Garden:
 Ten steps. Multiple false starts. Victory.
 
 This is what collaboration actually looks like. Not smooth execution - messy learning, unexpected obstacles, laughing at ourselves, and building something real anyway.
+
+---
+*2026-02-17 19:52*
+
+The documentation about unicode limitations failed due to unicode limitations. The irony was not lost on either of us.
