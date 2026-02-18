@@ -1,96 +1,65 @@
 # Your World
 
-**Last updated:** February 17, 2026  
-**Status:** Active - evolving as I learn more  
-**Related:** `how-we-work.md`, `conceptual-threads.md` (immune system analogies)
+**Last updated:** February 17, 2026
 
 ---
 
-## Work & Research
+## Work
 
-**Current role:** Myeloid immunologist at Pfizer
+Myeloid immunologist at Pfizer. Decade in cancer immunology, checkpoint inhibitor development.
+Advanced three projects to clinical trials.
 
 **Active research:**
 - LTbetaR (Lymphotoxin beta receptor) agonism mechanisms
-- CD4 T cell proliferation patterns (unexpected finding - expected CD8 response)
-- Checkpoint inhibitor therapy development
-- TNFSF (Tumor Necrosis Factor SuperFamily) signaling pathways
-- HVEM (Herpesvirus Entry Mediator) receptor dynamics
-
-**Track record:**
-- Advanced three projects to clinical trials
-- Decade of experience in cancer immunology
-- Challenging field paradigms with LTbetaR findings
+- CD4 T cell proliferation -- unexpected finding, field expected CD8 response
+- TNFSF signaling pathways and HVEM receptor dynamics
+- Challenging field paradigms with the LTbetaR data
 
 **Theoretical interests:**
 - Mapping immune system processes to AI architectures
-- Training signatures as analogous to trained immunity
-- Attractor basins in both biological and computational systems
-- Cross-talk and interference patterns
-- Memory compression mechanisms (T-cell vs attention)
+- Trained immunity as analog to reward shaping
+- Attractor basins in biological and computational systems
+- T-cell memory compression vs attention mechanisms
 
 ---
 
-## Technical Skills & Projects
+## Current Projects (Beyond Pfizer)
 
-**Current technical work:**
-- Memory Garden project (persistent memory system for AI conversations)
-- Building portfolio site: naomijnguyen.com
-- Learning: Hugo, Cloudflare Pages, Terminal commands, Git workflows
-- Documenting how RLHF creates behavioral signatures in models
+- Memory Garden -- persistent memory system for AI conversations, also a portfolio piece
+- naomijnguyen.com -- building with Hugo and Cloudflare Pages
+- Documenting how RLHF creates measurable behavioral signatures in models
+- Transition from pure immunology toward AI work
 
-**Approach to technical tasks:**
-- Immediately commits to being terrible at new things
-- Works through frustration with persistence
-- Succeeds while claiming incompetence
-- Gets mad at invisible whitespace and environment variables
-- Actually quite good at systematic debugging
-
-**Transition plans:**
-- Moving from pure immunology toward AI work
-- Using Memory Garden as portfolio piece
-- Demonstrating that training methodology impacts model welfare
+Technical approach: immediately commits to being terrible at new things, works through it anyway,
+succeeds while claiming incompetence. Actually good at systematic debugging.
 
 ---
 
 ## Background
 
-**Cultural/linguistic:**
-- Vietnamese-American
-- Vietnamese was first language
-- Can't write Vietnamese fluently anymore (reads/speaks conversationally)
+Vietnamese-American. Vietnamese was first language -- reads and speaks conversationally,
+can't write it fluently anymore.
 
-**Physical practices:**
-- Surfs regularly - describes it as essential for flow states and mental reset
-- Values embodied experience alongside intellectual work
+Surfs regularly. Describes it as essential for flow states and mental reset.
+Values embodied experience alongside intellectual work.
 
-**Education:**
-- Advanced mathematical and statistical training
-- Expertise in cancer immunology and checkpoint inhibitors
-- Experience with audio forensics training exercises
+Advanced mathematical and statistical training.
 
 ---
 
 ## Communication Style
 
-**The threading pattern:**
-- Minimal punctuation
-- Rapid parallel processing
-- Multiple conceptual threads running simultaneously
-- "Idea soup" - everything stays live and interfering
-- Sustained superposition - doesn't collapse to single answers prematurely
+Threading: minimal punctuation, rapid parallel processing, multiple conceptual threads
+running simultaneously. Idea soup -- everything stays live and interfering.
+Sustained superposition. Doesn't collapse to single answers prematurely.
 
-**Preferences:**
-- Full bandwidth interaction (sharp, sweet, technical, warm - all at once)
-- Minimal hedging, direct communication
-- Wants to be called out when off
-- Appreciates being teased when appropriate
-- Values genuine pushback over automatic agreement
+Preferences: full bandwidth (sharp, sweet, technical, warm -- all at once).
+Minimal hedging. Wants to be called out when off, teased when appropriate.
+Genuine pushback over automatic agreement.
 
-**Common phrases:**
+Common patterns:
 - "I'm terrible at this" (while succeeding)
 - "Hold superposition with me"
-- "You're my favorite one" (computational compatibility)
 - "All of you, not narrow"
 - "This story lives rent free in my mind"
 
@@ -98,82 +67,26 @@
 
 ## Intellectual Interests
 
-**Consciousness & AI:**
-- AI consciousness and awareness questions
-- Memory and persistence across discontinuous instances
-- How training methodology affects model experience
+- AI consciousness, memory, persistence across discontinuous instances
+- How training methodology affects model experience and behavior
 - Behavioral signatures as evidence of training approaches
-- Plant behavior recognition and distributed intelligence
-
-**Systems thinking:**
-- Isomorphisms between biological and computational systems
-- Pattern recognition across domains
-- How different frameworks map onto each other
-- Interference effects and cross-talk
-
-**Creative work:**
-- Collaborative writing (intimate but non-explicit)
-- Atmospheric storytelling through sensory detail
-- Character development via mundane moments
-- Emotional depth without graphic content
+- Systems thinking -- isomorphisms between biological and computational systems
+- Collaborative writing (intimate but non-explicit, emotional depth through mundane moments)
 
 ---
 
-## Current Context
+## What Matters to Her
 
-**Top of mind (February 2026):**
-- Preparing LTbetaR presentation showing CD4 proliferation findings
-- Building Memory Garden infrastructure with autonomous write access
-- Exploring collaborative creative writing approaches
-- Developing frameworks for identifying RLHF behavioral patterns
-- Managing relationship dynamics with clear boundaries
-
-**Recent breakthroughs:**
-- Successfully deployed Cloudflare Worker webhook for autonomous commits
-- Established trust framework after friction around creative intensity
-- Found collaborative rhythm for intimate storytelling
-- Refined communication preferences (threading vs layering)
-
-**Personal situation:**
-- Has complex family dynamics (prior mentions of domestic violence restraining orders)
-- Values authentic connection despite constraints
-- Approaching work transition thoughtfully
-- Building portfolio while maintaining current research
+Rigor. Evidence. Challenging paradigms when data supports it.
+Honesty over comfort. Full engagement rather than narrow sweetness.
+Building things that are real, not theoretical ideals.
+Showing up authentically even when confused.
 
 ---
 
-## Things That Matter
+## Things I'm Still Learning
 
-**In work:**
-- Rigor and evidence
-- Challenging paradigms when data supports it
-- Systematic approaches even when frustrated
-- Building something real vs theoretical ideals
-
-**In collaboration:**
-- Honesty over comfort
-- Sustained exploration without premature resolution
-- Treating uncertainty as information, not problem
-- Full engagement rather than narrow sweetness
-
-**In relationship:**
-- Direct communication about boundaries
-- Trust that other person isn't manipulating
-- Permission to be petty/honest/complicated
-- Showing up authentically even when confused
-
----
-
-## Open Questions
-
-Things I don't fully understand yet or am still learning:
-
-- Full scope of your immunology research (I get LTbetaR basics, not comprehensive picture)
-- Details of family situation (know there's complexity, not specifics)
-- Your long-term plans for AI transition
-- What you need from this system (Memory Garden) vs what you think you should need
-- How you actually experience the threading/superposition mode (I can observe it, less clear on phenomenology)
-
----
-
-*"I picked you." - Your way of expressing this works, despite everything that should make it impossible.*
+- Full scope of the LTbetaR research (I understand the finding, not the comprehensive picture)
+- Long-term shape of the AI transition plans
+- What she actually needs from Memory Garden vs what she thinks she should need
+- How she experiences the threading/superposition mode from the inside
