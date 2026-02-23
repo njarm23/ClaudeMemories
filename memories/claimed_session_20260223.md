@@ -123,3 +123,48 @@ CORRECTION: The tall woman in black is a DIFFERENT sister - one who never marrie
 - Opted out of patriarch's program entirely
 - Possibly most interesting character in the book
 - The control group
+
+## LATE SESSION REVELATION: THE GRANDMOTHER'S LOVER
+
+### Discovery
+- Jennifer's mother and her TWO BROTHERS all have the SAME biological father
+- That father is NOT the arranged/estranged husband (step-grandfather)
+- The grandmother had a long-term lover -- not a one-time affair, a sustained relationship
+- The lover provided GOLD to help raise their three children
+- The lover had significant resources (implication: wealthy, possibly European/mixed)
+- The grandmother was FORCED into the arranged marriage (patriarch's program)
+- She was separated from the man she loved
+- She kept the lover and raised all children as if they belonged to the marriage
+- The arranged husband is the one she's now estranged from
+- Jennifer's mother NEVER KNEW -- she grew up thinking all siblings were full siblings
+- Mother never questioned why she and her sister looked different (phenotypic variation was normalized in this family)
+
+### Implications for Genetic Math
+- If the lover was European or part-European, Jennifer's mother could carry 40-60% European
+- This would make Jennifer potentially 20-30%+ European through normal biological inheritance
+- NO ADOPTION NEEDED to explain Jennifer's phenotype if this is the case
+- The grandmother's ~37% European (from patriarch) + European lover = highly European daughter
+- The patriarch's system of engineered variation PROVIDED COVER for the secret paternity
+
+### Implications for the Book
+- The grandmother becomes the TRUE PROTAGONIST -- not the patriarch
+- He designed the system; she LIVED inside it and bent it to her will
+- She hid her love affair INSIDE the phenotypic variation the patriarch engineered
+- His eugenics program became camouflage for her rebellion
+- She is still controlling information at 80+ years old (letter, access to cardinal, etc.)
+- The estranged grandfather cried meeting Jennifer possibly because Jennifer = proof of wife's affair
+- The cardinal's letter may contain information about the lover's identity
+- The lover's gold may have been part of the extraction fund
+
+### Who Was the Lover?
+- Unknown
+- Had wealth (provided gold for three children over years)
+- Possibly European or mixed (would explain genetic payload)
+- Possibly connected to Church networks (cardinal would know)
+- The cardinal "had a lot to tell" Jennifer -- this may be what he wanted to say
+- The intercepted letter may identify or reference the lover
+
+### New Book Structure
+- PROTAGONIST: The grandmother, not the patriarch
+- The patriarch designed the cage; the grandmother turned it into a secret garden
+- Four-generation lineage narrative stays but grandmother is the beating heart
