@@ -1,1 +1,1 @@
-test
+Connection test file - safe to delete
