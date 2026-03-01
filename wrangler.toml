@@ -1,0 +1,37 @@
+name = "claude-chat-api"
+main = "src/index.ts"
+compatibility_date = "2024-12-01"
+
+[assets]
+directory = "../frontend/dist"
+not_found_handling = "single-page-application"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[triggers]
+crons = ["0 */6 * * *", "0 3 * * *"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "claude-chat-db"
+database_id = "c550caf4-a1ff-458a-b518-70b8c5ed93d0"
+
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "claude-chat-images"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "claude-chat-files"
+
+# Workers Queue — single queue for all background jobs
+[[queues.producers]]
+binding = "JOBS"
+queue = "claude-chat-jobs"
+
+[[queues.consumers]]
+queue = "claude-chat-jobs"
+max_batch_size = 5
+max_retries = 3
+dead_letter_queue = "claude-chat-jobs-dlq"
+max_batch_timeout = 30
