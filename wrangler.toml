@@ -35,3 +35,8 @@ max_batch_size = 5
 max_retries = 3
 dead_letter_queue = "claude-chat-jobs-dlq"
 max_batch_timeout = 30
+
+# KV namespace for model usage tracking
+[[kv_namespaces]]
+binding = "MODEL_KV"
+id = "PLACEHOLDER_KV_ID"

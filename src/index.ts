@@ -12,6 +12,7 @@ import { handleFileRoutes, handleFileServe } from "./routes/files";
 import { handleExportRoutes } from "./routes/exports";
 import { handleArchiveRoutes } from "./routes/archive";
 import { handleQueue } from "./queue";
+import { getModelStatus } from "./model-detector";
 
 export default {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
@@ -45,6 +46,15 @@ export default {
       if (authError) return authError;
 
       // --- Authenticated routes ---
+
+      // Model status (lightweight KV read, no DB)
+      if (method === "GET" && path === "/api/model-status") {
+        const status = await getModelStatus(env.MODEL_KV);
+        return new Response(JSON.stringify(status), {
+          headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
+        });
+      }
+
       // Order matters: specific routes before parameterized ones.
       // Each handler returns Response if matched, null if not.
       const response = await handleConversationRoutes(method, path, url, request, env, ctx)

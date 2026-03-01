@@ -1,6 +1,7 @@
 import type { Env } from "../types";
 import { generateId, json, error, matchRoute, getFileConfig } from "../utils";
 import { enqueueGossip } from "../gossip";
+import { extractModelFromSSE, trackModel } from "../model-detector";
 
 // --- Shared types ---
 interface ConversationSettings {
@@ -359,6 +360,7 @@ async function streamClaudeResponse(
     const decoder = new TextDecoder();
     let accumulated = "";
     let buffer = "";
+    let detectedModel = "unknown";
 
     try {
       while (true) {
@@ -384,6 +386,10 @@ async function streamClaudeResponse(
 
           try {
             const parsed = JSON.parse(data);
+            // Extract model from the first message_start event
+            if (eventType === "message_start" && detectedModel === "unknown") {
+              detectedModel = extractModelFromSSE(data);
+            }
             if (eventType === "content_block_delta" && parsed.delta?.text) {
               accumulated += parsed.delta.text;
               const chunk = `event: delta\ndata: ${JSON.stringify({ text: parsed.delta.text })}\n\n`;
@@ -404,6 +410,11 @@ async function streamClaudeResponse(
       await env.DB.prepare(
         "INSERT INTO messages_fts(message_id, conversation_id, role, content) VALUES (?, ?, 'assistant', ?)"
       ).bind(assistantMsgId, conversationId, accumulated).run();
+
+      // Track which model actually responded
+      if (detectedModel !== "unknown") {
+        await trackModel(env.MODEL_KV, detectedModel).catch(() => {});
+      }
 
       // Auto-title conversation if first message
       if (opts?.autoTitleContent && (opts?.contextLength ?? 999) <= 1) {

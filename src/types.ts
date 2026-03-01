@@ -4,6 +4,7 @@ export interface Env {
   IMAGES: R2Bucket;
   FILES: R2Bucket;
   JOBS: Queue<QueueJob>;
+  MODEL_KV: KVNamespace;
   ANTHROPIC_API_KEY: string;
   OPENAI_API_KEY: string;
   AUTH_PASSWORD: string;
