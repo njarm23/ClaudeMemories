@@ -39,4 +39,4 @@ max_batch_timeout = 30
 # KV namespace for model usage tracking
 [[kv_namespaces]]
 binding = "MODEL_KV"
-id = "PLACEHOLDER_KV_ID"
+id = "a9ec99d94bf94e0b84d9da2046cac46d"
