@@ -101,6 +101,26 @@ Claude edits via webhook only.
 
 ---
 
+## Model Tracking
+
+The proxy worker can detect which model (Claude, GPT, Grok, etc.) is
+responding to each request. Model info lives in the response body JSON,
+not headers.
+
+Reference module: technical/worker/model-detector.js
+Full documentation: technical/model-tracking.md
+
+KV keys (in MODEL_TRACKING namespace):
+  model:current  -- last model that responded
+  model:counts   -- cumulative usage by model family
+  model:gossip   -- rolling log of last 20 model changes
+
+garden_save() accepts an optional model parameter:
+  garden_save("path.md", "content", model="opus")
+  # Commit message: "Claude (opus): Adding to path"
+
+---
+
 ## Archive Policy
 
 recent/ holds the last 3-4 weeks of active material.

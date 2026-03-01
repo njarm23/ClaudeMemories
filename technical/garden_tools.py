@@ -47,7 +47,8 @@ def garden_save(
     content: str,
     append: bool = False,
     add_timestamp: bool = False,
-    message: Optional[str] = None
+    message: Optional[str] = None,
+    model: Optional[str] = None
 ) -> dict:
     """
     Save content to Memory Garden
@@ -81,7 +82,10 @@ def garden_save(
     if message is None:
         action = "Updating" if append else "Adding to"
         filename = filepath.split('/')[-1].replace('.md', '')
-        message = f"Claude: {action} {filename}"
+        if model:
+            message = f"Claude ({model}): {action} {filename}"
+        else:
+            message = f"Claude: {action} {filename}"
     
     # Commit
     payload = {
